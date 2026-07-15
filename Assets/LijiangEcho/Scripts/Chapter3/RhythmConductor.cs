@@ -67,6 +67,9 @@ namespace LijiangEcho.Chapter3
 
         public void StartLevel()
         {
+            // Prefab 友好化：绘制窗口留空则自动在场景里找（含未激活）
+            if (drawingWindow == null) drawingWindow = FindObjectOfType<DrawingWindow>(true);
+
             _notes = (useDefaultChart || chart == null) ? NoteChart.BuildDefault() : new List<NoteEntry>(chart.notes);
             _nextInterlude = 0;
             _interludeDone = 0;
