@@ -20,16 +20,18 @@
 ## 2. 装包
 
 **已在 manifest 里、打开工程自动装（脚本编译需要）：**
-`com.unity.xr.openxr`、`com.unity.xr.interaction.toolkit`、`com.unity.inputsystem`、
-`com.unity.textmeshpro`、`com.unity.ugui`。
+`com.unity.xr.interaction.toolkit`、`com.unity.inputsystem`、`com.unity.textmeshpro`、`com.unity.ugui`。
 
-**搭 MR 场景时再手动加这两个（透视用，让 Unity 自动挑匹配你编辑器的版本，避免版本冲突）：**
+**搭 MR 场景时再手动加这三个（透视/OpenXR 用，让 Unity 挑匹配你编辑器的版本，避免版本冲突）：**
 `Window > Package Manager > 左上「+」> Add package by name`，依次输入：
+- `com.unity.xr.openxr`
 - `com.unity.xr.arfoundation`
 - `com.unity.xr.meta-openxr`
 
-> 之所以不写死在 manifest：这两个包对编辑器版本敏感，写死具体版本容易解析失败、
-> 连累整个工程编译不过。用 Package Manager 加最稳。
+> **为什么不写死在 manifest**：这几个包对编辑器版本很敏感。实测在 Unity 中国版 2022.3.62 上，
+> OpenXR 最新的 **1.14.3 编译报错**（`OpenXRRenderSettings.cs` 找不到 `PermissionCallbacks`）。
+> 用 Package Manager 手动加时，若默认版本报同样的错，点包详情里的 **See other versions**，
+> 换一个**较低的稳定版**（如 1.12.x / 1.13.x）再装即可。
 
 ## 3. 开 OpenXR + Meta 透视功能
 
