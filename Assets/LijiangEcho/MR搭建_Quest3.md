@@ -33,14 +33,18 @@
 > 用 Package Manager 手动加时，若默认版本报同样的错，点包详情里的 **See other versions**，
 > 换一个**较低的稳定版**（如 1.12.x / 1.13.x）再装即可。
 
-## 3. 开 OpenXR + Meta 透视功能
+## 3. 开 OpenXR + Meta Quest 支持
 
 `Edit > Project Settings > XR Plug-in Management`：
 1. Android 页签勾选 **OpenXR**；
 2. 进 `OpenXR` 子页：
    - Interaction Profiles 添加 **Oculus Touch Controller Profile**；
-   - 勾选功能：**Meta Quest Support**、**Meta Quest: Passthrough**（由 meta-openxr 提供）；
-3. `Project Settings > XR Plug-in Management > Meta OpenXR` 里确认 Passthrough 已启用。
+   - OpenXR Feature Groups 勾 **Meta Quest Support**（基础 OpenXR 里**没有**单独的 “Passthrough”
+     勾选框，别找了——透视不在这里开）。
+
+> **透视到底在哪开？** 不在 OpenXR 设置里勾框。装了 `AR Foundation` + `Meta OpenXR` 后，
+> 透视是靠**场景里的 AR 相机**实现的（见第 4 步：相机加 `AR Camera Background`、背景 Alpha=0）。
+> OpenXR 这边只要 “Meta Quest Support” 勾上即可。
 
 ## 4. 场景：XR Origin + AR 透视
 
