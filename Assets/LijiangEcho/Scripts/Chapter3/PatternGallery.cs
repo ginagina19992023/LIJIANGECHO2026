@@ -21,8 +21,8 @@ namespace LijiangEcho.Chapter3
         [Header("引用")]
         [SerializeField] private GameObject root;
         [SerializeField] private UnityEngine.UI.Image silhouetteImage;
-        [SerializeField] private TMPro.TextMeshProUGUI titleText;
-        [SerializeField] private TMPro.TextMeshProUGUI descText;
+        [SerializeField] private UnityEngine.UI.Text titleText;   // uGUI 内置文本（离线可用）
+        [SerializeField] private UnityEngine.UI.Text descText;
         [SerializeField] private AudioDirector audioDirector;
 
         [Header("卡片数据")]
