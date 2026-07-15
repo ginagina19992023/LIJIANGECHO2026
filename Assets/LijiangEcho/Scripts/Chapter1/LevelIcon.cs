@@ -14,13 +14,19 @@ namespace LijiangEcho.Chapter1
         private Vector3 _baseScale;
         private bool _hovering;
 
-        private void Awake() => _baseScale = transform.localScale;
+        private void Awake()
+        {
+            _baseScale = transform.localScale;
+            // Prefab 友好化：controller 留空则自动在场景里找
+            if (controller == null) controller = FindObjectOfType<LevelSelectController>(true);
+        }
 
         public void SetHover(bool hovering) => _hovering = hovering;
 
         /// <summary>由 XR 射线 Select（确认键）事件调用。</summary>
         public void OnSelected()
         {
+            if (controller == null) controller = FindObjectOfType<LevelSelectController>(true);
             if (controller != null) controller.SelectLevel(this);
         }
 

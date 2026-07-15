@@ -31,6 +31,12 @@ namespace LijiangEcho.Chapter2
 
         public void ToggleJoystickMove() => joystickMoveEnabled = !joystickMoveEnabled;
 
+        private void Awake()
+        {
+            // Prefab 友好化：head 留空则自动用 Camera.main（XR 相机需 tag = MainCamera）
+            if (head == null && Camera.main != null) head = Camera.main.transform;
+        }
+
         private void Update()
         {
             if (!joystickMoveEnabled || !CanMove || input == null || head == null) return;

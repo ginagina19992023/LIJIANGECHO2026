@@ -14,8 +14,8 @@ namespace LijiangEcho.Chapter2
         [Header("配置")]
         [SerializeField] private int patternIndex;
         [SerializeField] private float triggerRadius = 1.2f;
-        [SerializeField] private Transform player;             // 头显/相机
-        [SerializeField] private DrawingWindow drawingWindow;
+        [SerializeField] private Transform player;             // 头显/相机(留空则自动用 Camera.main)
+        [SerializeField] private DrawingWindow drawingWindow;  // 留空则自动在场景里找
 
         [Header("表现")]
         [SerializeField] private GameObject glowEffect;        // 外发光特效
@@ -31,6 +31,10 @@ namespace LijiangEcho.Chapter2
             _col = GetComponent<SphereCollider>();
             _col.isTrigger = true;
             _col.radius = triggerRadius;
+
+            // Prefab 友好化：留空时自动补全引用，拖进场景即可用，无需手动连线
+            if (player == null && Camera.main != null) player = Camera.main.transform;
+            if (drawingWindow == null) drawingWindow = FindObjectOfType<DrawingWindow>(true);
         }
 
         private void Update()
