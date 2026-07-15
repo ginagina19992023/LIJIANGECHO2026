@@ -17,11 +17,19 @@
 - Scripting Backend：**IL2CPP**；Target Architectures：**ARM64**；
 - Color Space：**Linear**。
 
-## 2. 装包（本工程 manifest 已声明，打开会自动拉取）
+## 2. 装包
 
-- `com.unity.xr.openxr`、`com.unity.xr.arfoundation`、`com.unity.xr.meta-openxr`、
-  `com.unity.xr.interaction.toolkit`、`com.unity.inputsystem`。
-- 若没自动装，`Window > Package Manager` 里手动确认这几个已安装。
+**已在 manifest 里、打开工程自动装（脚本编译需要）：**
+`com.unity.xr.openxr`、`com.unity.xr.interaction.toolkit`、`com.unity.inputsystem`、
+`com.unity.textmeshpro`、`com.unity.ugui`。
+
+**搭 MR 场景时再手动加这两个（透视用，让 Unity 自动挑匹配你编辑器的版本，避免版本冲突）：**
+`Window > Package Manager > 左上「+」> Add package by name`，依次输入：
+- `com.unity.xr.arfoundation`
+- `com.unity.xr.meta-openxr`
+
+> 之所以不写死在 manifest：这两个包对编辑器版本敏感，写死具体版本容易解析失败、
+> 连累整个工程编译不过。用 Package Manager 加最稳。
 
 ## 3. 开 OpenXR + Meta 透视功能
 
