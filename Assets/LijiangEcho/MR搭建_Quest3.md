@@ -20,25 +20,31 @@
 ## 2. 装包
 
 **已在 manifest 里、打开工程自动装（脚本编译需要）：**
-`com.unity.xr.openxr`、`com.unity.xr.interaction.toolkit`、`com.unity.inputsystem`、
-`com.unity.textmeshpro`、`com.unity.ugui`。
+`com.unity.xr.interaction.toolkit`、`com.unity.inputsystem`、`com.unity.textmeshpro`、`com.unity.ugui`。
 
-**搭 MR 场景时再手动加这两个（透视用，让 Unity 自动挑匹配你编辑器的版本，避免版本冲突）：**
+**搭 MR 场景时再手动加这三个（透视/OpenXR 用，让 Unity 挑匹配你编辑器的版本，避免版本冲突）：**
 `Window > Package Manager > 左上「+」> Add package by name`，依次输入：
+- `com.unity.xr.openxr`
 - `com.unity.xr.arfoundation`
 - `com.unity.xr.meta-openxr`
 
-> 之所以不写死在 manifest：这两个包对编辑器版本敏感，写死具体版本容易解析失败、
-> 连累整个工程编译不过。用 Package Manager 加最稳。
+> **为什么不写死在 manifest**：这几个包对编辑器版本很敏感。实测在 Unity 中国版 2022.3.62 上，
+> OpenXR 最新的 **1.14.3 编译报错**（`OpenXRRenderSettings.cs` 找不到 `PermissionCallbacks`）。
+> 用 Package Manager 手动加时，若默认版本报同样的错，点包详情里的 **See other versions**，
+> 换一个**较低的稳定版**（如 1.12.x / 1.13.x）再装即可。
 
-## 3. 开 OpenXR + Meta 透视功能
+## 3. 开 OpenXR + Meta Quest 支持
 
 `Edit > Project Settings > XR Plug-in Management`：
 1. Android 页签勾选 **OpenXR**；
 2. 进 `OpenXR` 子页：
    - Interaction Profiles 添加 **Oculus Touch Controller Profile**；
-   - 勾选功能：**Meta Quest Support**、**Meta Quest: Passthrough**（由 meta-openxr 提供）；
-3. `Project Settings > XR Plug-in Management > Meta OpenXR` 里确认 Passthrough 已启用。
+   - OpenXR Feature Groups 勾 **Meta Quest Support**（基础 OpenXR 里**没有**单独的 “Passthrough”
+     勾选框，别找了——透视不在这里开）。
+
+> **透视到底在哪开？** 不在 OpenXR 设置里勾框。装了 `AR Foundation` + `Meta OpenXR` 后，
+> 透视是靠**场景里的 AR 相机**实现的（见第 4 步：相机加 `AR Camera Background`、背景 Alpha=0）。
+> OpenXR 这边只要 “Meta Quest Support” 勾上即可。
 
 ## 4. 场景：XR Origin + AR 透视
 
