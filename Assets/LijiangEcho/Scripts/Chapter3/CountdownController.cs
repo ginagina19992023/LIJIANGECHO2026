@@ -13,7 +13,7 @@ namespace LijiangEcho.Chapter3
     public class CountdownController : MonoBehaviour
     {
         [SerializeField] private GameObject root;
-        [SerializeField] private TMPro.TextMeshProUGUI numberText;  // 需要 TextMeshPro
+        [SerializeField] private UnityEngine.UI.Text numberText;    // 倒计时数字（uGUI 内置，离线可用；如需美术字体可换 TextMeshPro）
         [SerializeField] private AudioSource tickSfx;               // 每秒单声轻铜鼓
         [SerializeField] private float perSecond = 1f;
         [SerializeField] private UnityEvent onFinished;             // 结束回调（启动打击）
